@@ -57,7 +57,7 @@ console.log("process PID: %d", process.pid);
 
 ### process 常用方法
 
-### 当前工作目录 process.cwd()
+#### 当前工作目录 process.cwd()
 
 process.cwd()方法返回进程当前的工作目录
 
