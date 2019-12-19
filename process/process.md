@@ -92,3 +92,49 @@ console.log("end");
 // end
 // nextTick cb
 ```
+
+### process 标准流对象
+
+process 中有三个标准备流的操作，与 其他 streams 流操作不同的是，process 中流操作是同步写,阻塞的。
+
+#### 标准错误流: process.stderr
+
+process.stderr 是一个指向标准错误流的可写流 Writable Stream。console.error 就是通过 process.stderr 实现的。
+
+#### 标准输入流：process.stdin
+
+process.stdin 是一个指向标准输入流的可读流 Readable Stream。
+
+```js
+process.stdin.setEncoding("utf8");
+
+process.stdin.on("readable", () => {
+  let chunk;
+  // 使用循环确保我们读取所有的可用数据。
+  while ((chunk = process.stdin.read()) !== null) {
+    if (chunk === "\n") {
+      process.stdin.emit("end");
+      return;
+    }
+    process.stdout.write(`收到数据: ${chunk}`);
+  }
+});
+
+process.stdin.on("end", () => {
+  process.stdout.write("结束监听");
+});
+```
+
+![process-stdin](./process-stdin.gif)
+
+#### 标准输出流：process.stdout
+
+process.stdout 是一个指向标准输出流的可写流 Writable Stream。console.log 就是通过 process.stdout 实现的
+
+```js
+console.log = function(d) {
+  process.stdout.write(d + "\n");
+};
+
+console.log("Hello Nodejs"); // Hello Nodejs
+```
