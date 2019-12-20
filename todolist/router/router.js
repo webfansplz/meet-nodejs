@@ -1,9 +1,5 @@
-// 注册路由
-function register(type, name, handle) {
-  Object.assign(this.routes[type], {
-    [name]: handle
-  });
-}
+const { register, formatUrl } = require("../utils/index.js");
+
 class Router {
   constructor() {
     this.routes = {
@@ -27,8 +23,14 @@ class Router {
   }
   init(req, res) {
     const { method, url } = req;
-    const handle = this.routes[method.toLowerCase()][url];
-    handle && handle(req, res);
+    const result = formatUrl(method.toLowerCase(), url);
+    const handle = this.routes[method.toLowerCase()][result.url];
+    if (handle) {
+      handle(req, res, result.query);
+    } else {
+      res.writeHead(404);
+      res.end("404 Not Found");
+    }
   }
 }
 module.exports = Router;
