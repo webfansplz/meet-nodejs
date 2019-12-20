@@ -8,18 +8,18 @@ Node.js 中一个文件就是一个模块。如，在 index.js 中加载同目�
 
 ```js
 // circle.js
-const PI = Math.PI;
+const PI = Math.PI
 
-exports.area = r => PI * r * r;
+exports.area = r => PI * r * r
 
-exports.circumference = r => 2 * PI * r;
+exports.circumference = r => 2 * PI * r
 ```
 
 ```js
 // index.js
-const circle = require("./circle.js");
+const circle = require('./circle.js')
 
-console.log(`半径为 4 的圆面积为 ${circle.area(4)}`); // 半径为 4 的圆面积为 50.26548245743669
+console.log(`半径为 4 的圆面积为 ${circle.area(4)}`) // 半径为 4 的圆面积为 50.26548245743669
 ```
 
 circle.js 中通过 exports 导出了 area()和 circumference 两个方法，这两个方法可以其它模块中调用。
@@ -34,16 +34,16 @@ exports 是对 module.exports 的一个简单引用。如果你需要将模块�
 module.exports = width => {
   return {
     area: () => width * width
-  };
-};
+  }
+}
 ```
 
 ```js
 // index.js
 
-const square = require("./square.js");
-const mySquare = square(2);
-console.log(`The area of my square is ${mySquare.area()}`); // The area of my square is 4
+const square = require('./square.js')
+const mySquare = square(2)
+console.log(`The area of my square is ${mySquare.area()}`) // The area of my square is 4
 ```
 
 ### 2. 访问主模块
@@ -51,7 +51,7 @@ console.log(`The area of my square is ${mySquare.area()}`); // The area of my sq
 当 Node.js 直接运行一个文件时，require.main 属性会被设置为 module 本身。这样，就可通过这个属性判断模块是否被直接运行：
 
 ```js
-require.main === module;
+require.main === module
 ```
 
 比如,对于上面例子的 index.js 来说, node index.js 上面值就是 true, 而通过 require('./index')时, 值却是 false.
@@ -59,7 +59,7 @@ require.main === module;
 module 提供了一个 filename 属性，其值通常等于\_\_filename。 所以，当前程序的入口点可以通过 require.main.filename 来获取。
 
 ```js
-console.log(require.main.filename === __filename); // true
+console.log(require.main.filename === __filename) // true
 ```
 
 ### 3. 解析模块路径
@@ -67,10 +67,10 @@ console.log(require.main.filename === __filename); // true
 使用 require.resolve()函数,可以获取 require 加载的模块的确切文件名,此操作只返回解析后的文件名，不会加载该模块。
 
 ```js
-console.log(require.resolve("./square.js")); // /Users/null/meet-nodejs/module/square.js
+console.log(require.resolve('./square.js')) // /Users/null/meet-nodejs/module/square.js
 ```
 
-下面是使用伪代码介绍 require.resolve 的工作过程：
+require.resolve 的工作过程：
 
 ```js
 require(X) from module at path Y
@@ -136,30 +136,30 @@ NODE_MODULES_PATHS(START)
 
 ```js
 // a.js
-console.log("a starting");
-exports.done = false;
-const b = require("./b.js");
-console.log("in a, b.done = %j", b.done);
-exports.done = true;
-console.log("a done");
+console.log('a starting')
+exports.done = false
+const b = require('./b.js')
+console.log('in a, b.done = %j', b.done)
+exports.done = true
+console.log('a done')
 ```
 
 ```js
 // b.js
-console.log("b starting");
-exports.done = false;
-const a = require("./a.js");
-console.log("in b, a.done = %j", a.done);
-exports.done = true;
-console.log("b done");
+console.log('b starting')
+exports.done = false
+const a = require('./a.js')
+console.log('in b, a.done = %j', a.done)
+exports.done = true
+console.log('b done')
 ```
 
 ```js
 // main.js
-console.log("main starting");
-const a = require("./a.js");
-const b = require("./b.js");
-console.log("in main, a.done=%j, b.done=%j", a.done, b.done);
+console.log('main starting')
+const a = require('./a.js')
+const b = require('./b.js')
+console.log('in main, a.done=%j, b.done=%j', a.done, b.done)
 ```
 
 首先 main.js 会加载 a.js，接着 a.js 又会加载 b.js。这时，b.js 又会尝试去加载 a.js。
@@ -201,11 +201,11 @@ in main, a.done=true, b.done=true
 当前模块的目录名。 与 \_\_filename 的 path.dirname() 相同。
 
 ```js
-console.log(__dirname); // /Users/null/meet-nodejs/module
+console.log(__dirname) // /Users/null/meet-nodejs/module
 
-console.log(require("path").dirname(__filename)); // /Users/null/meet-nodejs/module
+console.log(require('path').dirname(__filename)) // /Users/null/meet-nodejs/module
 
-console.log(__dirname === require("path").dirname(__filename)); // true
+console.log(__dirname === require('path').dirname(__filename)) // true
 ```
 
 ### 8. module 对象
@@ -223,22 +223,22 @@ module.exports 通过模块系统创建。有时它的工作方式与我们所�
 ```js
 // a.js
 
-const EventEmitter = require("events");
+const EventEmitter = require('events')
 
-module.exports = new EventEmitter();
+module.exports = new EventEmitter()
 
 // Do some work, and after some time emit
 // the 'ready' event from the module itself.
 setTimeout(() => {
-  module.exports.emit("ready");
-}, 1000);
+  module.exports.emit('ready')
+}, 1000)
 ```
 
 ```js
-const a = require("./a");
-a.on("ready", () => {
-  console.log("module a is ready");
-});
+const a = require('./a')
+a.on('ready', () => {
+  console.log('module a is ready')
+})
 ```
 
 需要注意，分配给 module.exports 的导出值必须能立刻获取到，当使用回调时其不能正常执行。
