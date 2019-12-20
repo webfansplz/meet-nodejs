@@ -4,9 +4,31 @@
 
 ## 13 个基础核心模块
 
-<a href="## 1. 事件触发器 events 模块"> 1. 事件触发器 events 模块</a>
+[ 1. 事件触发器 events 模块](#1)
 
-<a href="## 2. 本地路径 path 模块"> 2. 本地路径 path 模块</a>
+[ 2. 本地路径 path 模块](#2)
+
+[ 3. 文件操作系统 fs 模块](#3)
+
+[ 4. 全局对象 process 进程](#4)
+
+[ 5. http 模块](#5)
+
+[ 6. 统一资源定位符 url 模块](#6)
+
+[ 7. 压缩 zlib 模块](#7)
+
+[ 8. 流 stream 模块](#8)
+
+[ 9. 逐行读取 readline 模块](#9)
+
+[ 10. 查询字符串 querystring 模块](#10)
+
+[ 11. module 模块](#11)
+
+[ 12. 缓冲器 Buffer 模块](#12)
+
+[ 13. 域名服务器 dns 模块](#13)
 
 Node.js 内置模块远不止 13 个,入门阶段我们先了解一些常用的基础核心模块.
 
@@ -22,7 +44,7 @@ Node.js 内置模块远不止 13 个,入门阶段我们先了解一些常用的�
 
 - Node.js 核心模块方法实践
 
-## 1. 事件触发器 events 模块
+<h2 id="1"> 1. 事件触发器 events 模块</h2>
 
 > Node.js 使用了一个**事件驱动**、非阻塞式 I/O 的模型，使其轻量又高效。
 
@@ -215,7 +237,7 @@ mrNull.emit('play')
 // play !  移除后不再触发
 ```
 
-## 2. 本地路径 path 模块
+<h2 id="2"> 2. 本地路径 path 模块</h2>
 
 Node.js 提供了 path 模块,用于处理文件路径和目录路径 . 不同操作系统 表现有所差异 !
 
@@ -303,7 +325,7 @@ path.format({
 path.relative('/path/example/index.js', '/path') // ../..
 ```
 
-## 3. 文件操作系统 fs 模块
+<h2 id="3">3 .文件操作系统 fs 模块</h2>
 
 > 在一些场景下,我们需要对文件进行 增删改查等操作, Nodejs 提供了 fs 模块,让我们对文件进行操作.
 
@@ -443,7 +465,7 @@ console.log(stats.isDirectory()) // false
 
 **在一些复杂的操作场景下,fs 模块要做很多判断与处理 ,这里我推荐大家使用 [fs-extra](https://github.com/jprichardson/node-fs-extra),它在 fs 的基础上扩展了一些方法,让一些复杂操作更简便!**
 
-## 4. 全局对象 process 进程
+<h2 id="4">4. 全局对象 process 进程</h2>
 
 > process 对象是一个 Global 全局对象，你可以在任何地方使用它，而无需 require。process 是 EventEmitter 的一个实例，所以 process 中也有相关事件的监听。使用 process 对象，可以方便处理进程相关操作。
 
@@ -584,7 +606,7 @@ console.log = function(d) {
 console.log('Hello Nodejs') // Hello Nodejs
 ```
 
-## 5. http 模块
+<h2 id="5">5. http 模块</h2>
 
 > http 模块是 Node.js 中非常重要的一个核心模块。通过 http 模块，你可以使用其 http.createServer 方法创建一个 http 服务器，也可以使用其 http.request 方法创建一个 http 客户端。(本文先不说),Node 对 HTTP 协议及相关 API 的封装比较底层，其仅能处理流和消息，对于消息的处理，也仅解析成报文头和报文体，但是不解析实际的报文头和报文体内容。这样不仅解决了 HTTP 原本比较难用的特性，也可以支持更多的 HTTP 应用.
 
@@ -672,7 +694,7 @@ const server = http.createServer((req, res) => {
 server.listen(3000)
 ```
 
-## 6. 统一资源定位符 url 模块
+<h2 id="6">6. 统一资源定位符 url 模块</h2>
 
 Node.js 提供了 url 模块,用于处理与解析 URL。
 
@@ -715,7 +737,7 @@ console.log(myURL.toString()) // https://github.com/webfansplz#hello
 console.log(myURL.toJSON()) //  https://github.com/webfansplz#hello
 ```
 
-## 7. 压缩 zlib 模块
+<h2 id="7">7. 压缩 zlib 模块</h2>
 
 在流传输过程中，为减少传输数据加快传输速度，往往会对流进行压缩。
 
@@ -793,7 +815,7 @@ const server = http.createServer((req, res) => {
 server.listen(4396)
 ```
 
-## 8. 流 stream 模块
+<h2 id="8">8. 流 stream 模块</h2>
 
 流（stream）是 Node.js 中处理流式数据的抽象接口。 stream 模块用于构建实现了流接口的对象。
 
@@ -869,7 +891,7 @@ server.listen(1337)
 
 对于大部分的 nodejs 开发者来说，平常并不会直接用到 stream 模块,但是理解 stream 流的运行机制却是尤其重要的.
 
-## 9. 逐行读取 readline 模块
+<h2 id="9">9. 逐行读取 readline 模块</h2>
 
 readline 模块是一个流内容的逐行读取模块，通过 require('readline')引用模块。你可以用 readline 模块来读取 stdin，可以用来逐行读取文件流，也可用它来在控制台和用户进行一些交互。
 
@@ -893,7 +915,7 @@ rl.question('你如何看待 null-cli ？', answer => {
 
 很多有趣的 CLI 工具是基于 readline 造的哦,有兴趣的同学也可以尝试~
 
-## 10. 查询字符串 querystring 模块
+<h2 id="10">10. 查询字符串 querystring 模块</h2>
 
 querystring 模块是 Node.js 中的工具模块之一，用于处理 URL 中的查询字符串，即：querystring 部分。查询字符串指：URL 字符串中，从问号"?"(不包括?)开始到锚点"#"或者到 URL 字符串的结束（存在#，则到＃结束，不存在则到 URL 字符串结束）的部分叫做查询字符串。querystring 模块可将 URL 查询字符串解析为对象，或将对象序列化为查询字符串。
 
@@ -944,7 +966,7 @@ console.log(querystring.parse(str)) // { 'url=github.com%2Fwebfansplz&name=null'
 console.log(querystring.parse(querystring.unescape(str))) // { url: 'github.com/webfansplz', name: 'null' }
 ```
 
-## 11. module 模块
+<h2 id="11">11. module 模块</h2>
 
 > Node.js 实现了一个简单的模块加载系统。在 Node.js 中，文件和模块是一一对应的关系，可以理解为一个文件就是一个模块。其模块系统的实现主要依赖于全局对象 module，其中实现了 exports(导出)、require()(加载)等机制。
 
@@ -1219,7 +1241,7 @@ function require(...) {
 
 - module.require 提供了类似 require()的功能，可以从最初的模块加载一个模块
 
-## 12. 缓冲器 Buffer 模块
+<h2 id="12">缓冲器 Buffer 模块</h2>
 
 在引入 TypedArray 之前，JavaScript 语言没有用于读取或操作二进制数据流的机制。 Buffer 类是作为 Node.js API 的一部分引入的，用于在 TCP 流、文件系统操作、以及其他上下文中与八位字节流进行交互。
 
@@ -1265,7 +1287,7 @@ const buf = Buffer.from(base64Str, 'base64')
 console.log(buf.toString('utf8')) // Hello world
 ```
 
-## 13.域名服务器 dns 模块
+<h2 id="13">13. 域名服务器 dns 模块</h2>
 
 DNS（Domain Name System，域名系统），DNS 协议运行在 UDP 协议之上，使用端口号 53。DNS 是因特网上作为域名和 IP 地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的 IP 数串。简单的说，就是把域名（网址）解析成对应的 IP 地址。Node.js 的 dns 模块，提供了 DNS 解析功能。当使用 dns 模块中的 net.connect(80, 'github.com/webfansplz')方法 或 http 模块的 http.get({ host: 'github.com/webfansplz' })方法时，在其底层会使用 dns 模块中的 dns.lookup 方法进行域名解析。
 
