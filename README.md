@@ -1241,7 +1241,7 @@ function require(...) {
 
 - module.require 提供了类似 require()的功能，可以从最初的模块加载一个模块
 
-<h2 id="12">缓冲器 Buffer 模块</h2>
+<h2 id="12">12. 缓冲器 Buffer 模块</h2>
 
 在引入 TypedArray 之前，JavaScript 语言没有用于读取或操作二进制数据流的机制。 Buffer 类是作为 Node.js API 的一部分引入的，用于在 TCP 流、文件系统操作、以及其他上下文中与八位字节流进行交互。
 
